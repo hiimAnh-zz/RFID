@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="./js/jquery-2.0.3.min.js" data-semver="2.0.3" data-require="jquery"></script>
+
+    <link href="./css/demo_table.css" rel="stylesheet"  />
+    <link href="./css/demo_page.css" rel="stylesheet"  />
+    
+    <link  rel="stylesheet" href="./css/jquery-ui-1.10.0.custom.min.css" />
+    
+    <script  src="./js/jquery-ui.js"></script>
+    
+    <script src="./js/jquery.dataTables.js" data-semver="1.9.4" data-require="datatables@*"></script>
+    
+    <link href="./css/style.css" rel="stylesheet" />
+
+    <script src = "./js/dataTables.buttons.min.js"> </script>
+
+    <script src="./js/script.js"></script>
+    <script src = "./js/jquery.table2excel.js"></script>
+  </head>
+
+  <body>
+
+    <button>Export</button>
+
+<p id="date_filter">
+    <span id="date-label-from" class="date-label">From: </span><input class="date_range_filter date" type="text" id="datepicker_from" />
+    <span id="date-label-to" class="date-label">To:<input class="date_range_filter date" type="text" id="datepicker_to" />
+</p>
+    <table width="100%" class="display" id="datatable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody id = id01>
+      </tbody>
+    </table>
+    
+    <script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://www.w3schools.com/js/customers_mysql.php";
+    
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myFunction(this.responseText);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    
+    function myFunction(response) {
+        var arr = JSON.parse(response);
+        var i;
+        var out = " ";
+        for(i = 0; i < arr.length; i++) {
+            out += "<tr>" +
+            "<td>" +arr[i].Name +"</td>" +
+            "<td>" +arr[i].City + "</td>"+
+            "<td>" +arr[i].Country + "</td>" +"</tr>";
+        }
+        document.getElementById("id01").innerHTML = out;
+    }
+    </script>
+    
+  
+  </body>
+
+</html>
